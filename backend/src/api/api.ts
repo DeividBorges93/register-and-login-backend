@@ -1,6 +1,8 @@
 import 'express-async-errors';
-import express from 'express';
-// import userRouter from '../routes/user.routes';
+import cors from 'cors';
+import errorMiddleware from '../middlewares/error.middleware';
+import express, { Request, Response } from 'express';
+import { userRouter } from '../routes';
 
 class Api {
   public api: express.Express;
@@ -9,6 +11,7 @@ class Api {
     this.api = express();
 
     this.config();
+    this.routes();
   }
 
   private config():void {
@@ -19,10 +22,20 @@ class Api {
       next();
     };
 
+    this.api.use(cors());
     this.api.use(express.json());
     this.api.use(accessControl);
 
-    // this.api.use(userRouter);
+  }
+  
+  private routes(): void {
+    this.api.get(
+      '/ping',
+      (_req: Request, res: Response) => res.status(200).json({ data: 'Pong' })
+      );
+      
+    this.api.use(userRouter);
+    this.api.use(errorMiddleware);
   }
 
   public start(PORT: string | number):void {
