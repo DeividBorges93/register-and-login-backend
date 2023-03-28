@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  transaction Transaction?
+  username    String       @db.VarChar(25)
+  email       String       @unique
+  password    String       @db.VarChar(10)
+}
+
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id   Int      @unique
+  value     Int
+  createdAt DateTime @default(now())
+}
