@@ -12,4 +12,13 @@ export default class UserController {
 
     return res.status(201).json(newUser);
   }
+
+  public login = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { token } = await this.userService.login(req.body);
+
+    req.headers.Authorization = token;
+
+    return res.status(200).json(token);
+  };
 };
