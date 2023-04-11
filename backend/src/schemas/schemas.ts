@@ -26,3 +26,8 @@ export const UserSchema = z.object({
 });
 
 export type User = z.infer<typeof UserSchema>;
+
+export const UserLoginSchema = z.object({
+  username: z.string({ required_error: 'Username é obrigatório' }),
+  password: z.string({ required_error: 'Password é obrigatório'})
+});
