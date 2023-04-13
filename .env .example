@@ -1,0 +1,2 @@
+DATABASE_URL="postgresql://postgres:'YOUR_PASSWORD'@localhost:'LOCALHOST_PORT'/'DB_NAME'?schema=public"
+JWT_SECRET=DEFINE_YOUR_SECRET
