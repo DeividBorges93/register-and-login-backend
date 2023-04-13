@@ -10,20 +10,7 @@ generator client {
 
 model User {
   id          Int          @id @default(autoincrement())
-  transaction Transaction?
   username    String       @db.VarChar(25)
   email       String       @unique
   password    String       @db.VarChar(100)
-}
-
-model Transaction {
-  id                 Int      @id @default(autoincrement())
-  user               User     @relation(fields: [user_id], references: [id])
-  user_id            Int      @unique
-  currency_convert   Int
-  value_convert      Int
-  conversion_rate    Int
-  currency_converted Int
-  value_converted    Int
-  createdAt          DateTime @default(now())
 }
