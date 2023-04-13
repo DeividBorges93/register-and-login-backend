@@ -10,10 +10,10 @@ const numMinUsername = 3;
 const numMinPassword = 8
 
 const messages = {
-  minUsername: "Usuário precisa ter pelo menos 3 caracteres",
-  minLogin: "Senha precisa ter pelo menos 8 caracteres",
-  minOneNumber: "Senha precisa ter um número",
-  oneUpCase: "Senha precisa ter uma letra maiúscula"
+  minUsername: "User must be at least 3 characters",
+  minLogin: "Password must be at least 8 characters long",
+  minOneNumber: "Password must have a number",
+  oneUpCase: "Password must have a capital letter"
 }
 
 export const UserSchema = z.object({
@@ -28,6 +28,6 @@ export const UserSchema = z.object({
 export type User = z.infer<typeof UserSchema>;
 
 export const UserLoginSchema = z.object({
-  username: z.string({ required_error: 'Username é obrigatório' }),
-  password: z.string({ required_error: 'Password é obrigatório'})
+  username: z.string({ required_error: 'Username is required' }),
+  password: z.string({ required_error: 'Password is required'})
 });
