@@ -31,10 +31,7 @@ export default class UserService {
       },
     });
 
-    const { id } = createdUser;
-
     const newUser = {
-      id,
       username,
       email
     };
