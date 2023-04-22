@@ -1,17 +1,16 @@
-import { PrismaClient } from '@prisma/client';
-import { User } from '../schemas/schemas';
-import IUser from '../interfaces/IUser';
-import IError from '../interfaces/IError';
 import { validateFieldsLoginUser, validateFieldsUser } from '../utils/validateFields';
-import { hash } from 'bcrypt';
-import IToken from '../interfaces/IToken';
-import UserAlreadyRegistered from '../utils/userAlreadyRegistered';
+import { PrismaClient } from '@prisma/client';
 import { compareHash } from '../utils/hashPassword';
+import { User } from '../schemas/schemas';
+import { hash } from 'bcrypt';
+import UserAlreadyRegistered from '../utils/userAlreadyRegistered';
+import IToken from '../interfaces/IToken';
+import IError from '../interfaces/IError';
+import IUser from '../interfaces/IUser';
 import Jwt from '../utils/tokenGenerator';
 
 const prisma = new PrismaClient();
 const userAlreadyRegistered = new UserAlreadyRegistered();
-
 
 export default class UserService {
   public register = async (user: User): Promise<IUser | IError> => {
@@ -42,7 +41,7 @@ export default class UserService {
   public login = async (user: User): Promise<IToken> => {
     const { username, email, password } = user;
 
-    const userRegistered = await userAlreadyRegistered.verifyForLogin(username);
+    const userRegistered = await userAlreadyRegistered.verifyForLogin({ username, email });
 
     validateFieldsLoginUser(user);
 
