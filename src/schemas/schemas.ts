@@ -13,7 +13,8 @@ const messages = {
   minUsername: "User must be at least 3 characters",
   minLogin: "Password must be at least 8 characters long",
   minOneNumber: "Password must have a number",
-  oneUpCase: "Password must have a capital letter"
+  oneUpCase: "Password must have a capital letter",
+  noPermitted: "'@' is not allowed in the password"
 }
 
 export const UserSchema = z.object({
@@ -22,7 +23,8 @@ export const UserSchema = z.object({
   password: z.string({ required_error: 'Password is required'})
   .min(numMinPassword, messages.minLogin)
   .regex(regexNeedANumber, { message: messages.minOneNumber })
-  .regex(regexneedAUpCase, { message: messages.oneUpCase }),
+  .regex(regexneedAUpCase, { message: messages.oneUpCase })
+  .refine((password) => !password.includes('@'), { message: messages.noPermitted}),
 });
 
 export type User = z.infer<typeof UserSchema>;
