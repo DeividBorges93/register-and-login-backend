@@ -1,13 +1,17 @@
-import { validateFieldsLoginUser, validateFieldsUser } from '../utils/validateFields';
-import { PrismaClient } from '@prisma/client';
-import { compareHash } from '../utils/hashPassword';
-import { User } from '../schemas/schemas';
-import { hash } from 'bcrypt';
-import UserAlreadyRegistered from '../utils/userAlreadyRegistered';
-import IToken from '../interfaces/IToken';
-import IError from '../interfaces/IError';
-import IUser from '../interfaces/IUser';
-import Jwt from '../utils/tokenGenerator';
+import { PrismaClient } from "@prisma/client";
+import { hash } from "bcrypt";
+
+import IError from "../interfaces/IError";
+import IToken from "../interfaces/IToken";
+import IUser from "../interfaces/IUser";
+import { User } from "../schemas/schemas";
+import { compareHash } from "../utils/hashPassword";
+import Jwt from "../utils/tokenGenerator";
+import UserAlreadyRegistered from "../utils/userAlreadyRegistered";
+import {
+  validateFieldsLoginUser,
+  validateFieldsUser,
+} from "../utils/validateFields";
 
 const prisma = new PrismaClient();
 const userAlreadyRegistered = new UserAlreadyRegistered();
@@ -24,24 +28,27 @@ export default class UserService {
 
     const createdUser = await prisma.user.create({
       data: {
-        username: username,
-        email: email,
+        username,
+        email,
         password: hashedPassword,
       },
     });
 
     const newUser = {
       username,
-      email
+      email,
     };
 
     return newUser;
-  }
+  };
 
   public login = async (user: User): Promise<IToken> => {
     const { username, email, password } = user;
 
-    const userRegistered = await userAlreadyRegistered.verifyForLogin({ username, email });
+    const userRegistered = await userAlreadyRegistered.verifyForLogin({
+      username,
+      email,
+    });
 
     validateFieldsLoginUser(user);
 
@@ -49,10 +56,10 @@ export default class UserService {
 
     const matchPassword = compareHash(password, dbPassword);
 
-    if (!matchPassword) throw { code: 401, message: 'Senha inválida' };
+    if (!matchPassword) throw { code: 401, message: "Senha inválida" };
 
-    const token = new Jwt().encrypt({ id, username, email});
+    const token = new Jwt().encrypt({ id, username, email });
 
     return { token } as IToken;
-  }
+  };
 }
