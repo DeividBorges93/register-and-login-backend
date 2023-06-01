@@ -24,7 +24,7 @@ export default class UserService {
 
     const hashedPassword = await hash(password, 6);
 
-    await userAlreadyRegistered.verifyForRegister(username);
+    await userAlreadyRegistered.verifyForRegister(user);
 
     const createdUser = await prisma.user.create({
       data: {
@@ -45,10 +45,7 @@ export default class UserService {
   public login = async (user: User): Promise<IToken> => {
     const { username, email, password } = user;
 
-    const userRegistered = await userAlreadyRegistered.verifyForLogin({
-      username,
-      email,
-    });
+    const userRegistered = await userAlreadyRegistered.verifyForLogin(user);
 
     validateFieldsLoginUser(user);
 
