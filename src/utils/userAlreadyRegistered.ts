@@ -6,10 +6,17 @@ import IUserWP from "../interfaces/IUserWithPassword";
 const prisma = new PrismaClient();
 
 export default class userAlreadyRegistered {
-  public verifyForRegister = async (username: string) => {
+  public verifyForRegister = async (user: IUser) => {
+    const { username, email } = user;
+
     const userAlreadyRegistered = await prisma.user
       .findFirst({
-        where: { username },
+        where: {
+          OR: [
+            { username: username },
+            { email: email },
+          ]
+        },
       })
       .catch((err) => {
         err;
