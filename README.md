@@ -1,19 +1,19 @@
-# Welcome to the Registration and Login API!
- - An API for creating a user and logging in
+# Registration and Login Backend System
+ - Welcome to the Registration and Login backend system! This application allows users to register and login to their accounts.
 
-  ## Contains:
- - Route for user registration
- - Route for user login
- - Encrypted password
- - User token validation
- - Validation of an already registered user
- - Login with username or email
+  ## Features
+  - User registration route
+  - User login route
+  - Password encryption
+  - User token validation
+  - Validation for existing users
+  - Login with username or email
 
-  ## User and Password rules:
-  - Username must be at least 3 characters
+  ## User and Password requirements:
+  - Username must be at least 3 characters long
   - Password must be at least 8 characters long
-  - Password must have a number
-  - Password must have a capital letter
+  - Password must contain a number
+  - Password must contain a capital letter
 
   ## Technologies and tools:
   [![TypeScript Badge](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=TypeScript)](https://www.typescriptlang.org/docs/)
@@ -28,9 +28,13 @@
   [![express Badge](https://img.shields.io/badge/-Express-black?style=flat-square&logo=express)](https://www.npmjs.com/package/express)
   [![express-async-errors Badge](https://img.shields.io/badge/-ExpressAsyncErrors-black?style=flat-square&logo=express-async-errors)](https://www.npmjs.com/package/express-async-errors)
 
-# Prerequisite to start the application
+# Prerequisites
 
 Before you start, you will need to have the following tools installed on your machine: [![Git Badge](https://img.shields.io/badge/-Git-black?style=flat-square&logo=git)](https://git-scm.com) [![Nodejs Badge](https://img.shields.io/badge/-Nodejs-black?style=flat-square&logo=Node.js)](https://nodejs.org/en/)
+
+# Getting Started
+
+Follow these steps to get the application up and running:
 
 - Clone the repository
 ~~~Java
