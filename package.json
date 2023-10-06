@@ -28,7 +28,7 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "start": "npm run build && nodemon ./dist/src/api/server.js",
+    "start": "nodemon ./dist/src/api/server.js",
     "dev": "ts-node ./src/api/api.ts",
     "build": "tsc",
     "lint": "eslint .",
